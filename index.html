@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Flow Without Fear</title>
+  <meta name="description" content="Ending period poverty through education and support.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/templatemo-kind-heart-charity.css">
+  <style>
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 2000;
+    }
+    .modal-content {
+      background: white;
+      padding: 20px;
+      max-width: 400px;
+      margin: 10% auto;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .copy-button {
+      margin-top: 10px;
+      padding: 8px 16px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .modal-close-button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: #e91e63;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .mpesa-icon {
+      width: 24px;
+      height: 24px;
+    }
+    .mpesa-qr {
+      margin-top: 10px;
+      width: 160px;
+      height: auto;
+    }
+    .dropdown {
+      position: relative;
+    }
+    .dropbtn {
+      background-color: transparent;
+      color: white;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .dropdown-content {
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+      position: absolute;
+      background-color: white;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+      top: 100%;
+      right: 0;
+    }
+    
+    .dropdown-content a:hover {
+      background-color: #e91e63;
+      color: white;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    .slide-visible {
+      display: block;
+    }
+    .slide-hidden {
+      display: none;
+    }
+    .contact-line {
+      margin: 0;
+    }
+    .double-line-spacing {
+      line-height: 2;
+    }
+    .section-title-red {
+      color: red;
+    }
+
+    .counter-display {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+    }
+    .counter-icon {
+      margin-right: 10px;
+      font-size: 2.5rem;
+    }
+    .counter-value {
+      font-size: 2.5rem;
+      color: #333;
+      font-weight: bold;
+    }
+    .counter-plus {
+      font-size: 2.5rem;
+      color: #333;
+    }
+    .counter-label {
+      color: #2196F3;
+      font-size: 1.8rem;
+      margin-left: 10px;
+    }
+
+    .testimonial-style {
+      background: #fce4ec;
+    }
+    .blockquote-style {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.2rem;
+      line-height: 2;
+      color: #000;
+    }
+    .hero-style {
+      background: #ffe4f1;
+      padding: 80px 20px 40px;
+    }
+
+    .paragraph-style {
+      font-size: 1.2rem;
+      color: #000;
+      line-height: 2;
+    }
+
+    .impact-title {
+      color: red;
+      font-size: 1.8rem;
+      text-align: center;
+    }
+    .site-logo {
+      height: 99px;
+    }
+    body { font-family: 'Arial', sans-serif; }
+
+    .nav-box {
+      background-color: #e91e63;
+      padding: 10px 20px;
+      border-radius: 8px;
+      display: flex;
+      gap: 15px;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+    .nav-box a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .nav-box a:hover {
+      text-decoration: underline;
+    }
+
+    .gradient-title {
+      background: linear-gradient(to right, #b71c1c, #f44336, white);
+      -webkit-background-clip: text;
+  background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 4rem;
+      font-weight: 900;
+      text-align: center;
+      width: 100%;
+      margin: 0 auto 20px;
+    }
+
+    .section-title h2 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-align: center;
+    }
+
+    .slideshow {
+      position: relative;
+      max-width: 600px;
+      margin: 30px auto;
+      border: 6px solid #f8bbd0;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .slide {
+      display: none;
+    }
+
+    .slide img {
+      width: 100%;
+      display: block;
+    }
+
+    .slide-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(255,255,255,0.9);
+      color: #e91e63;
+      border: none;
+      font-size: 24px;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 50%;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+
+    .slide-btn:hover {
+      background-color: #e91e63;
+      color: white;
+    }
+
+    .prev-btn { left: 10px; }
+    .next-btn { right: 10px; }
+
+    .rounded-carousel {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      padding: 40px 0;
+      position: relative;
+    }
+
+    .rounded-carousel .slide {
+      display: none;
+    }
+
+    .carousel-content {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .rounded-carousel img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 5px solid #f8bbd0;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .rounded-caption {
+      text-align: left;
+      font-weight: bold;
+    }
+
+    .grace-photo-inline {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 50%;
+      vertical-align: middle;
+      margin-left: 10px;
+    }
+
+    .icon-email { color: #D44638; }
+    .icon-whatsapp { color: #25D366; }
+
+    .footer-columns {
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+  .donate-option {
+      color: silver;
+      font-weight: bold;
+      background-color: teal;
+      padding: 14px 20px;
+      margin: 6px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .donate-option:hover {
+      background-color: #e91e63;
+      color: white;
+      transform: scale(1.05);
+      transition: all 0.3s ease;
+    }
+  .logo-centered {
+  margin-left: 40px;
+}
+
+.modal-overlay-card {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 2000;
+}
+
+.modal-content-card {
+  background: white;
+  padding: 20px;
+  max-width: 400px;
+  margin: 10% auto;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.modal-close-button-card {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: #e91e63;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.logo-offset {
+  margin-left: 80px;
+}
+.stylized-quote {
+  font-style: italic;
+  font-size: 1.3rem;
+  line-height: 1.8;
+  color: #880e4f;
+  border-left: 5px solid #f8bbd0;
+  padding-left: 15px;
+  margin-bottom: 1rem;
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container d-flex justify-content-between align-items-center position-relative">
+    <a class="navbar-brand" href="#">
+      <img src="logo.jpg" loading="lazy" alt="Logo" class="site-logo logo-centered logo-offset">
+    </a>
+  </div>
+</header>
+
+<div class="nav-box">
+  <a href="#about"><i class="fas fa-info-circle"></i> About</a>
+  <a href="#impact"><i class="fas fa-bullseye"></i> Our Impact</a>
+  <a href="#contact"><i class="fas fa-phone"></i> Contact</a>
+  <div class="dropdown">
+    <button class="dropbtn"><i class="fas fa-donate"></i> Donate</button>
+    <div class="dropdown-content">
+      <a href="#" onclick="openCardModal()" class="donate-option"><i class="fas fa-credit-card"></i> Debit/Visa</a>
+      <a href="#" onclick="openMpesaModal()" class="donate-option"><img src="https://img.icons8.com/?size=100&id=kUwZnzomzbTj&format=png&color=000000" alt="M-PESA Icon" class="mpesa-icon"> M-PESA</a>
+    </div>
+  </div>
+</div>
+
+<section class="hero-section text-center hero-style">
+  <h1 class="gradient-title">Flow Without Fear</h1>
+  <p class="lead">Empowering girls through dignity, education, and menstrual health.</p>
+</section>
+
+<!-- Our Impact Section -->
+<section id="impact" class="section-padding bg-light text-center">
+  <div class="container">
+    <div class="section-title">
+      <h2 class="section-title-red"><i class="fas fa-school fa-3x text-danger mb-3"></i> Our Impact</h2>
+      
+<p class="paragraph-style">Through the dedication of our volunteers, partnerships with schools, and consistent donations, we’ve been able to expand our reach year by year. What started with a few kits has turned into a growing movement that touches the lives of girls in villages, towns, and cities alike. The ripple effect of dignity and education continues to grow stronger with every pad delivered and every story shared.</p>
+    </div>
+    <div class="slideshow" id="slideshow2">
+      <div class="slide"><img src="impact 1.jpg"></div>
+      <div class="slide"><img src="impact 2.jpg"></div>
+      <div class="slide"><img src="impact 3.jpg"></div>
+      <div class="slide"><img src="impact 4.jpg"></div>
+      <div class="slide"><img src="images/impact/5.jpg"></div>
+      <button class="slide-btn prev-btn" onclick="changeSlide(-1, 'slideshow2')">❮</button>
+      <button class="slide-btn next-btn" onclick="changeSlide(1, 'slideshow2')">❯</button>
+    </div>
+    <div class="row mt-4">
+      <div class="col-md-4">
+        <h4 class="counter-display">
+  <i class="fas fa-hand-holding-heart text-danger counter-icon"></i>
+  <span id="counter" class="counter-value">0</span><span class="counter-plus">+</span>
+  <span class="counter-label">pads raised</span>
+</h4>
+      </div>
+      
+<p class="paragraph-style">Through powerful storytelling, visual demonstrations, and safe spaces for discussion, these workshops build awareness and agency. Parents, boys, and educators are also included—ensuring a supportive environment for all girls to thrive. We are not just informing; we are inspiring real social change with every session.</p>
+
+    </div>
+    <div class="slideshow mt-5" id="slideshow1">
+      <div class="slide"><img src="w1.jpg"></div>
+      <div class="slide"><img src="w2.jpg"></div>
+      <div class="slide"><img src="w3.jpg"></div>
+      <div class="slide"><img src="w4.jpg"></div>
+      <div class="slide"><img src="w5.jpg"></div>
+      <div class="slide"><img src="w6.jpg"></div>
+      <div class="slide"><img src="w7.jpg"></div>
+      <button class="slide-btn prev-btn" onclick="changeSlide(-1, 'slideshow1')">❮</button>
+      <button class="slide-btn next-btn" onclick="changeSlide(1, 'slideshow1')">❯</button>
+    </div>
+  <div class="row mt-5 double-line-spacing">
+  <div class="col-md-12">
+    <h4 class="impact-title"><i class="fas fa-lightbulb text-danger me-2"></i> Community-Led Innovation</h4>
+    <p class="paragraph-style">
+      At the heart of our mission is the power of local voices. Flow Without Fear empowers communities to create their own sustainable solutions through design-thinking and collaborative sessions. We believe in listening to those directly impacted by menstrual inequity, helping them craft responses that are innovative, accessible, and grounded in lived experience. With their ideas leading the way, we're ensuring that every program is tailored, impactful, and built for lasting change.
+    </p>
+  </div>
+</div>
+
+
+<section class="section-padding text-center testimonial-style">
+  <div class="container">
+    <div class="section-title">
+      <h2><i class="fas fa-quote-left text-danger me-2"></i> Testimonial</h2>
+    </div>
+    <blockquote class="blockquote blockquote-style">
+  <p class="stylized-quote">“Before Flow Without Fear, I didn’t understand what was happening to me. I used to miss classes and feel ashamed. But after the workshop and getting my first dignity kit, everything changed. I feel confident and empowered. Now, I help other girls understand they are not alone.”</p>
+  <footer class="blockquote-footer">&mdash; Aisha, 14 years old”</footer>
+</blockquote>
+  </div>
+</section>
+
+<!-- Team Carousel Section -->
+<div class="rounded-carousel">
+  <button class="slide-btn prev-btn" onclick="toggleCarousel(-1)">❮</button>
+  <div class="slide slide-visible" id="carousel-slide1">
+    <div class="carousel-content">
+      <img src="mary.jpg" alt="Mary Beryl">
+      <div class="rounded-caption">Mary Beryl<br><small>C.E.O</small></div>
+    </div>
+  </div>
+  <div class="slide slide-hidden" id="carousel-slide2">
+    <div class="carousel-content">
+      <img src="alex.jpg" alt="Alex John">
+      <div class="rounded-caption">Alex John<br><small>Senior Volunteer</small></div>
+    </div>
+  </div>
+  <div class="slide slide-hidden" id="carousel-slide3">
+    <div class="carousel-content">
+      <img src="team3.jpg" alt="Esther Mwangi">
+      <div class="rounded-caption">Esther Mwangi<br><small>Programs Coordinator</small></div>
+    </div>
+  </div>
+  <div class="slide slide-hidden" id="carousel-slide4">
+    <div class="carousel-content">
+      <img src="team4.jpg" alt="David Otieno">
+      <div class="rounded-caption">David Otieno<br><small>Community Lead</small></div>
+    </div>
+  </div>
+  <button class="slide-btn next-btn" onclick="toggleCarousel(1)">❯</button>
+</div>
+
+<!-- Footer -->
+<footer class="site-footer bg-dark text-white" id="contact">
+  <div class="container py-5 text-center">
+    <div class="footer-columns">
+      <div>
+        <h4>Contact</h4>
+        <p class="paragraph-style contact-line"><i class="fas fa-envelope icon-email"></i> <a href="mailto:flowwithoutfear.ke@gmail.com" class="text-white">flowwithoutfear.ke@gmail.com</a></p>
+        <p class="paragraph-style contact-line"><i class="fab fa-whatsapp icon-whatsapp"></i> <a href="https://wa.me/254712418257" class="text-white" target="_blank" rel="noopener">+254 712 418257</a></p>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <p class="paragraph-style contact-line"><a href="https://donorbox.org/flow-without-fear" class="text-white" target="_blank" rel="noopener">Donate Now</a></p>
+      </div>
+    </div>
+    <p class="mt-4">&copy; 2025 Flow Without Fear. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script>
+  const slideshows = {
+    'slideshow1': 0,
+    'slideshow2': 0
+  };
+
+  function showSlides(id) {
+    const container = document.getElementById(id);
+    const slides = container.querySelectorAll('.slide');
+    slides.forEach((s, i) => s.style.display = i === slideshows[id] ? 'block' : 'none');
+  }
+
+  function changeSlide(n, id) {
+    const container = document.getElementById(id);
+    const slides = container.querySelectorAll('.slide');
+    slideshows[id] = (slideshows[id] + n + slides.length) % slides.length;
+    showSlides(id);
+  }
+
+  showSlides('slideshow1');
+  showSlides('slideshow2');
+
+  let currentCarousel = 0;
+  const carouselSlides = [
+    document.getElementById("carousel-slide1"),
+    document.getElementById("carousel-slide2")
+  ];
+
+  function toggleCarousel(n) {
+    carouselSlides[currentCarousel].style.display = "none";
+    currentCarousel = (currentCarousel + n + carouselSlides.length) % carouselSlides.length;
+    carouselSlides[currentCarousel].style.display = "block";
+  }
+  // Countdown animation
+  let count = 0;
+  const counterElement = document.getElementById('counter');
+  function animateCounter() {
+    count++;
+    counterElement.textContent = count;
+    if (count >= 2000) count = 0;
+    setTimeout(animateCounter, 20);
+  }
+  animateCounter();
+</script>
+
+<div id="mpesaModal" class="modal-overlay">
+  <div class="modal-content">
+    <h3>M-PESA Donation</h3>
+    <p>To donate via M-PESA, use the following details:</p>
+    <p><strong>Send money to:</strong> 0746213640</p>
+<p><button onclick="copyMpesaNumber()" class="copy-button">Copy Number</button></p>
+<img src="mpesa-qr.png" alt="M-PESA QR Code" class="mpesa-qr">
+    <button onclick="closeMpesaModal()" class="modal-close-button">Close</button>
+  </div>
+</div>
+
+<script>
+  function openMpesaModal() {
+    document.getElementById('mpesaModal').style.display = 'block';
+  }
+  function closeMpesaModal() {
+    document.getElementById('mpesaModal').style.display = 'none';
+  }
+  function copyMpesaNumber() {
+    navigator.clipboard.writeText('0746213640').then(() => {
+      const button = document.querySelector('.copy-button');
+      button.innerHTML = 'Copied! <i class="fas fa-check" style="color: #4CAF50;"></i>';
+      setTimeout(() => {
+        button.innerHTML = 'Copy Number';
+      }, 2000);
+    });
+  }
+</script>
+<div id="cardModal" class="modal-overlay-card">
+  <div class="modal-content-card">
+    <h3>Debit/Visa Donation</h3>
+    <p>To donate via card, please visit:</p>
+    <p><a href="https://donorbox.org/flow-without-fear" target="_blank" rel="noopener">https://donorbox.org/flow-without-fear</a></p>
+    <button onclick="closeCardModal()" class="modal-close-button-card">Close</button>
+  </div>
+</div>
+
+<script>
+  function openCardModal() {
+    document.getElementById('cardModal').style.display = 'block';
+  }
+  function closeCardModal() {
+    document.getElementById('cardModal').style.display = 'none';
+  }
+</script>
+</body>
+</html>
