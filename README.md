@@ -18,4 +18,4 @@ A nonprofit website dedicated to ending period poverty through education, dignit
 
 1. Clone this repo:
    ```bash
-   git clone https://github.com/your-username/flow-without-fear.git
+   git clone https://github.com/joni89di/flow-without-fear.git
